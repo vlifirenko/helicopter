@@ -38,12 +38,13 @@ namespace Apache.Ecs
                 // game
                 .Add(new GameSystem())
                 .Add(new InputSystem())
+                .Add(new MouseTargetSystem())
 
                 // unit    
                 .Add(new InitUnitsSystem())
                 .Add(new MovementSystem())
                 .Add(new RotationSystem())
-                .Add(new MouseTargetSystem())
+                .Add(new MouseRotateSystem())
 
                 //
 #if UNITY_EDITOR

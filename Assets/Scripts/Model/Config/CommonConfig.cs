@@ -6,5 +6,6 @@ namespace Apache.Model.Config
     public class CommonConfig : ScriptableObject
     {
         public LayerMask groundLayer;
+        public LayerMask enemyLayer;
     }
 }
