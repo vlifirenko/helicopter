@@ -1,6 +1,7 @@
 using Apache.Ecs.Component.Unit;
 using Apache.Ecs.System;
 using Apache.Ecs.System.Game;
+using Apache.Ecs.System.Ui;
 using Apache.Ecs.System.Unit;
 using Apache.Model;
 using Apache.Model.Config;
@@ -42,9 +43,15 @@ namespace Apache.Ecs
 
                 // unit    
                 .Add(new InitUnitsSystem())
+                // movement
                 .Add(new MovementSystem())
                 .Add(new RotationSystem())
                 .Add(new MouseRotateSystem())
+                // target
+                .Add(new LookingTargetSystem())
+                
+                // ui
+                .Add(new UiShowTargetsSystem())
 
                 //
 #if UNITY_EDITOR

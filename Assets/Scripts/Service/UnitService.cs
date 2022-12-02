@@ -1,4 +1,6 @@
-﻿using Apache.Ecs.Component.Unit;
+﻿using System.Collections.Generic;
+using Apache.Ecs.Component.Unit;
+using Apache.Model;
 using Apache.View;
 using Leopotam.EcsLite;
 
@@ -24,6 +26,10 @@ namespace Apache.Service
             };
             _world.GetPool<MovementComponent>().Add(entity);
             _world.GetPool<RotationComponent>().Add(entity);
+            _world.GetPool<TargetsComponent>().Add(entity) = new TargetsComponent
+            {
+                Targets = new Dictionary<AUnitView, Target>()
+            };
 
             if (isPlayer)
                 _world.GetPool<PlayerComponent>().Add(entity);

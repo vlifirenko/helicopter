@@ -7,5 +7,6 @@ namespace Apache.Model.Config
     {
         public float moveSpeed = 2f;
         public float rotationSpeed = 2f;
+        public float lookingTargetDistance = 10f;
     }
 }
