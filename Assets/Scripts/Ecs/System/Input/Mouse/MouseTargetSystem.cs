@@ -5,9 +5,8 @@ using Apache.View;
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
-namespace Apache.Ecs.System.Game
+namespace Apache.Ecs.System.Input.Mouse
 {
     public class MouseTargetSystem : IEcsRunSystem
     {
@@ -15,13 +14,13 @@ namespace Apache.Ecs.System.Game
         private readonly EcsPoolInject<UnitComponent> _unitPool;
         private readonly EcsPoolInject<TargetComponent> _targetPool;
         private readonly EcsCustomInject<SceneData> _sceneData;
-        private readonly EcsCustomInject<CommonConfig> _commonConfig;
+        private readonly EcsCustomInject<GlobalConfig> _commonConfig;
 
         public void Run(IEcsSystems systems)
         {
             foreach (var entity in _filter.Value)
             {
-                var ray = _sceneData.Value.MainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
+                var ray = _sceneData.Value.MainCamera.ScreenPointToRay(UnityEngine.InputSystem.Mouse.current.position.ReadValue());
                 if (Physics.Raycast(ray, out var hit, Mathf.Infinity, _commonConfig.Value.enemyLayer))
                     TakeAim(hit.transform);
                 else

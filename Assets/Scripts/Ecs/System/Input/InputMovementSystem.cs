@@ -4,9 +4,9 @@ using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
 using UnityEngine;
 
-namespace Apache.Ecs.System.Game
+namespace Apache.Ecs.System.Input
 {
-    public class InputSystem : IEcsRunSystem
+    public class InputMovementSystem : IEcsRunSystem
     {
         private readonly EcsFilterInject<Inc<PlayerComponent>, Exc<DeadComponent>> _filter;
         private readonly EcsCustomInject<GameData> _gameData;
@@ -15,7 +15,8 @@ namespace Apache.Ecs.System.Game
 
         public void Run(IEcsSystems systems)
         {
-            OnMove(_gameData.Value.GameInput.Player.Move.ReadValue<Vector2>());
+            var move = _gameData.Value.GameInput.Player.Move.ReadValue<Vector2>();
+            OnMove(move);
         }
 
         private void OnMove(Vector2 value)

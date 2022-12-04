@@ -1,6 +1,9 @@
 using Apache.Ecs.Component.Unit;
 using Apache.Ecs.System;
 using Apache.Ecs.System.Game;
+using Apache.Ecs.System.Input;
+using Apache.Ecs.System.Input.Gamepad;
+using Apache.Ecs.System.Input.Mouse;
 using Apache.Ecs.System.Ui;
 using Apache.Ecs.System.Unit;
 using Apache.Model;
@@ -10,13 +13,14 @@ using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
 using Leopotam.EcsLite.ExtendedSystems;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Apache.Ecs
 {
     public class EcsStartup : MonoBehaviour
     {
         [SerializeField] private SceneData sceneData;
-        [SerializeField] private CommonConfig commonConfig;
+        [FormerlySerializedAs("commonConfig")] [SerializeField] private GlobalConfig globalConfig;
 
         private EcsWorld _world;
         private IEcsSystems _systems;
@@ -38,8 +42,9 @@ namespace Apache.Ecs
 
                 // game
                 .Add(new GameSystem())
-                .Add(new InputSystem())
+                .Add(new InputMovementSystem())
                 .Add(new MouseTargetSystem())
+                .Add(new GamepadRotateSystem())
 
                 // unit    
                 .Add(new InitUnitsSystem())
@@ -59,7 +64,7 @@ namespace Apache.Ecs
 #endif
                 .Inject(_gameData)
                 .Inject(_unitService)
-                .Inject(sceneData, commonConfig)
+                .Inject(sceneData, globalConfig)
                 //
                 .Inject()
                 .Init();
