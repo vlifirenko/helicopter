@@ -6,6 +6,7 @@ using Apache.Ecs.System.Input.Gamepad;
 using Apache.Ecs.System.Input.Mouse;
 using Apache.Ecs.System.Ui;
 using Apache.Ecs.System.Unit;
+using Apache.Ecs.System.Weapon;
 using Apache.Model;
 using Apache.Model.Config;
 using Apache.Service;
@@ -22,6 +23,7 @@ namespace Apache.Ecs
         [SerializeField] private SceneData sceneData;
         [SerializeField] private GlobalConfig globalConfig;
         [SerializeField] private WeaponConfig weaponConfig;
+        [SerializeField] private AudioConfig audioConfig;
 
         private EcsWorld _world;
         private IEcsSystems _systems;
@@ -29,6 +31,7 @@ namespace Apache.Ecs
         private GameData _gameData;
 
         private IUnitService _unitService;
+        private IAudioService _audioService;
 
         private void Start()
         {
@@ -37,6 +40,7 @@ namespace Apache.Ecs
             _world = new EcsWorld();
 
             _unitService = new UnitService(_world);
+            _audioService = new AudioService();
 
             _systems = new EcsSystems(_world);
             _systems
@@ -56,7 +60,9 @@ namespace Apache.Ecs
                 .Add(new RotationSystem())
                 // target
                 .Add(new LookingTargetSystem())
-                
+                // weapon
+                .Add(new ShootCannonSystem())
+
                 // ui
                 .Add(new UiShowTargetsSystem())
 
@@ -65,8 +71,8 @@ namespace Apache.Ecs
                 .Add(new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem())
 #endif
                 .Inject(_gameData)
-                .Inject(_unitService)
-                .Inject(sceneData, globalConfig, weaponConfig)
+                .Inject(_unitService, _audioService)
+                .Inject(sceneData, globalConfig, weaponConfig, audioConfig)
                 //
                 .Inject()
                 .Init();
@@ -81,6 +87,8 @@ namespace Apache.Ecs
 
             _world?.Destroy();
             _world = null;
+
+            _audioService.Destroy();
         }
     }
 }

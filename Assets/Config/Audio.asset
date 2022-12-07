@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 409588f0383a4bc384f99c83aa6dc1bc, type: 3}
+  m_Name: Audio
+  m_EditorClassIdentifier: 
+  targetFound:
+    Guid:
+      Data1: -138513
+      Data2: 1338359517
+      Data3: -333870680
+      Data4: -2018774756
+    Path: event:/SFX/UI/TargetFound
+  cannonShoot:
+    Guid:
+      Data1: 1394976533
+      Data2: 1243147296
+      Data3: -1902914372
+      Data4: 1013779217
+    Path: event:/SFX/Weapon/CannonShoot
+  enemyIdle:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 

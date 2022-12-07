@@ -2,6 +2,8 @@
 using System.Linq;
 using Apache.Ecs.Component.Unit;
 using Apache.Model;
+using Apache.Model.Config;
+using Apache.Service;
 using Apache.View;
 using Apache.View.Ui;
 using Leopotam.EcsLite;
@@ -17,6 +19,8 @@ namespace Apache.Ecs.System.Unit
         private readonly EcsPoolInject<UnitComponent> _unitPool;
         private readonly EcsPoolInject<TargetsComponent> _targetsPool;
         private readonly EcsCustomInject<SceneData> _sceneData;
+        private readonly EcsCustomInject<IAudioService> _audioService;
+        private readonly EcsCustomInject<AudioConfig> _audioConfig;
 
         public void Run(IEcsSystems systems)
         {
@@ -52,6 +56,7 @@ namespace Apache.Ecs.System.Unit
                             };
                             view.Show();
                             targets.Targets.Add(unitView, target);
+                            _audioService.Value.PlayOneShot(_audioConfig.Value.targetFound);
                         }
                         else
                             // update

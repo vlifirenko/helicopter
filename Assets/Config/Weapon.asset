@@ -12,3 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1076daebd5384c44a275ef4137094e6c, type: 3}
   m_Name: Weapon
   m_EditorClassIdentifier: 
+  hydra:
+    prefab: {fileID: 541743295888919946, guid: 517a1a76dd1abac4d95d97e27d8e4c1e, type: 3}
+    distance: 40
+    damage: 10
+    speed: 5
+    amount: 40
+  hellfire:
+    prefab: {fileID: 541743295888919946, guid: 517a1a76dd1abac4d95d97e27d8e4c1e, type: 3}
+    distance: 70
+    damage: 25
+    speed: 2
+    amount: 20
