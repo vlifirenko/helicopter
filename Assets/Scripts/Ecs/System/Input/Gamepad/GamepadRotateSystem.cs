@@ -14,7 +14,7 @@ namespace Apache.Ecs.System.Input.Gamepad
         private readonly EcsPoolInject<RotationComponent> _rotationPool;
         private readonly EcsCustomInject<SceneData> _sceneData;
         private readonly EcsCustomInject<GameData> _gameData;
-        private readonly EcsCustomInject<GlobalConfig> _commonConfig;
+        private readonly EcsCustomInject<GlobalConfig> _global;
 
         public void Init(IEcsSystems systems)
         {
@@ -34,7 +34,7 @@ namespace Apache.Ecs.System.Input.Gamepad
                 
                 direction = new Vector3(direction.x, 0f, direction.y);
                 rotation.Direction = direction;
-                rotation.Speed = unit.Config.rotationSpeed;
+                rotation.Speed = unit.Config.rotationSpeed * direction.magnitude;
             }
         }
     }

@@ -20,7 +20,8 @@ namespace Apache.Ecs
     public class EcsStartup : MonoBehaviour
     {
         [SerializeField] private SceneData sceneData;
-        [FormerlySerializedAs("commonConfig")] [SerializeField] private GlobalConfig globalConfig;
+        [SerializeField] private GlobalConfig globalConfig;
+        [SerializeField] private WeaponConfig weaponConfig;
 
         private EcsWorld _world;
         private IEcsSystems _systems;
@@ -42,16 +43,17 @@ namespace Apache.Ecs
 
                 // game
                 .Add(new GameSystem())
+                // input
                 .Add(new InputMovementSystem())
                 .Add(new MouseTargetSystem())
                 .Add(new GamepadRotateSystem())
+                .Add(new MouseRotateSystem())
 
                 // unit    
                 .Add(new InitUnitsSystem())
                 // movement
                 .Add(new MovementSystem())
                 .Add(new RotationSystem())
-                .Add(new MouseRotateSystem())
                 // target
                 .Add(new LookingTargetSystem())
                 
@@ -64,7 +66,7 @@ namespace Apache.Ecs
 #endif
                 .Inject(_gameData)
                 .Inject(_unitService)
-                .Inject(sceneData, globalConfig)
+                .Inject(sceneData, globalConfig, weaponConfig)
                 //
                 .Inject()
                 .Init();

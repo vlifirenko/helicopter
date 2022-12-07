@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Game.UI
+namespace Apache.Utils
 {
     /// <summary>
     /// Small helper class to convert viewport, screen or world positions to canvas space.

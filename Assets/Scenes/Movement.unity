@@ -675,7 +675,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneData: {fileID: 955847877}
-  commonConfig: {fileID: 11400000, guid: a39073c71b49162489f47732c8524d8a, type: 2}
+  globalConfig: {fileID: 11400000, guid: a39073c71b49162489f47732c8524d8a, type: 2}
+  weaponConfig: {fileID: 11400000, guid: cb3d2d99aef26974a8d9eb1cf299a620, type: 2}
 --- !u!4 &955847876
 Transform:
   m_ObjectHideFlags: 0

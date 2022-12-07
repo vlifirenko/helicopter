@@ -1,6 +1,6 @@
 ﻿using Apache.Ecs.Component.Unit;
 using Apache.Model;
-using Game.UI;
+using Apache.Utils;
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
 using UnityEngine;
