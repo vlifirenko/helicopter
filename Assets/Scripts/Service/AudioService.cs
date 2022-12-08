@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Apache.Utils;
 using FMOD.Studio;
 using FMODUnity;
 using UnityEngine;
@@ -9,6 +10,7 @@ namespace Apache.Service
     {
         private readonly List<EventInstance> _eventInstances = new List<EventInstance>();
         private readonly List<StudioEventEmitter> _eventEmitters = new List<StudioEventEmitter>();
+        private EventInstance _ambienceEventInstance;
 
         public void PlayOneShot(EventReference eventReference, Vector3 worldPosition)
             => RuntimeManager.PlayOneShot(eventReference, worldPosition);
@@ -31,6 +33,17 @@ namespace Apache.Service
 
             return emitter;
         }
+
+        public void InitializeAmbience(EventReference eventReference)
+        {
+            _ambienceEventInstance = CreateInstance(eventReference);
+            _ambienceEventInstance.start();
+            _ambienceEventInstance.getParameterByName(AudioParameter.WindIntensity, out var value);
+            Debug.Log(value);
+        }
+
+        public void SetAmbienceParameter(string parameter, float value) 
+            => _ambienceEventInstance.setParameterByName(parameter, value);
 
         public void Destroy()
         {

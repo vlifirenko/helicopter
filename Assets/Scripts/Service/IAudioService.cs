@@ -13,5 +13,9 @@ namespace Apache.Service
         public EventInstance CreateInstance(EventReference eventReference);
 
         public StudioEventEmitter InitializeEventEmitter(EventReference eventReference, GameObject emitterGameObject);
+
+        public void InitializeAmbience(EventReference eventReference);
+
+        public void SetAmbienceParameter(string parameter, float value);
     }
 }

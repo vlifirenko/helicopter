@@ -26,10 +26,10 @@ MonoBehaviour:
       Data3: -1902914372
       Data4: 1013779217
     Path: event:/SFX/Weapon/CannonShoot
-  enemyIdle:
+  ambience:
     Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
+      Data1: -363994179
+      Data2: 1332135883
+      Data3: 1881994894
+      Data4: 912248973
+    Path: event:/Ambience/Wind

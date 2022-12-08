@@ -939,6 +939,94 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Debug"",
+            ""id"": ""b90104a4-853a-4b75-b162-a49322d8ed7f"",
+            ""actions"": [
+                {
+                    ""name"": ""F1"",
+                    ""type"": ""Button"",
+                    ""id"": ""bbab1061-e9c9-4f5c-873f-a60986b84437"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""F2"",
+                    ""type"": ""Button"",
+                    ""id"": ""28360830-5734-4f9d-8f4d-5e379f7c9c91"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""F3"",
+                    ""type"": ""Button"",
+                    ""id"": ""26f2198b-ec71-4b07-8a51-1b6ae3268ed0"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""F4"",
+                    ""type"": ""Button"",
+                    ""id"": ""33e64bdd-09d1-42a1-8fad-0446e6ee829b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""87718ed2-478a-4cb3-9c58-3d2fda20d148"",
+                    ""path"": ""<Keyboard>/f1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""F1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d4dfc7ff-e39e-4c76-b670-7e2f94515978"",
+                    ""path"": ""<Keyboard>/f2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""F2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ccc7faec-a7a7-422f-8dd4-dba2d4b21b1a"",
+                    ""path"": ""<Keyboard>/f3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""F3"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""90045e63-88da-4032-a590-27d299f83968"",
+                    ""path"": ""<Keyboard>/f4"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""F4"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -1025,6 +1113,12 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
         m_UI_RightClick = m_UI.FindAction("RightClick", throwIfNotFound: true);
         m_UI_TrackedDevicePosition = m_UI.FindAction("TrackedDevicePosition", throwIfNotFound: true);
         m_UI_TrackedDeviceOrientation = m_UI.FindAction("TrackedDeviceOrientation", throwIfNotFound: true);
+        // Debug
+        m_Debug = asset.FindActionMap("Debug", throwIfNotFound: true);
+        m_Debug_F1 = m_Debug.FindAction("F1", throwIfNotFound: true);
+        m_Debug_F2 = m_Debug.FindAction("F2", throwIfNotFound: true);
+        m_Debug_F3 = m_Debug.FindAction("F3", throwIfNotFound: true);
+        m_Debug_F4 = m_Debug.FindAction("F4", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1266,6 +1360,63 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
         }
     }
     public UIActions @UI => new UIActions(this);
+
+    // Debug
+    private readonly InputActionMap m_Debug;
+    private IDebugActions m_DebugActionsCallbackInterface;
+    private readonly InputAction m_Debug_F1;
+    private readonly InputAction m_Debug_F2;
+    private readonly InputAction m_Debug_F3;
+    private readonly InputAction m_Debug_F4;
+    public struct DebugActions
+    {
+        private @GameInput m_Wrapper;
+        public DebugActions(@GameInput wrapper) { m_Wrapper = wrapper; }
+        public InputAction @F1 => m_Wrapper.m_Debug_F1;
+        public InputAction @F2 => m_Wrapper.m_Debug_F2;
+        public InputAction @F3 => m_Wrapper.m_Debug_F3;
+        public InputAction @F4 => m_Wrapper.m_Debug_F4;
+        public InputActionMap Get() { return m_Wrapper.m_Debug; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(DebugActions set) { return set.Get(); }
+        public void SetCallbacks(IDebugActions instance)
+        {
+            if (m_Wrapper.m_DebugActionsCallbackInterface != null)
+            {
+                @F1.started -= m_Wrapper.m_DebugActionsCallbackInterface.OnF1;
+                @F1.performed -= m_Wrapper.m_DebugActionsCallbackInterface.OnF1;
+                @F1.canceled -= m_Wrapper.m_DebugActionsCallbackInterface.OnF1;
+                @F2.started -= m_Wrapper.m_DebugActionsCallbackInterface.OnF2;
+                @F2.performed -= m_Wrapper.m_DebugActionsCallbackInterface.OnF2;
+                @F2.canceled -= m_Wrapper.m_DebugActionsCallbackInterface.OnF2;
+                @F3.started -= m_Wrapper.m_DebugActionsCallbackInterface.OnF3;
+                @F3.performed -= m_Wrapper.m_DebugActionsCallbackInterface.OnF3;
+                @F3.canceled -= m_Wrapper.m_DebugActionsCallbackInterface.OnF3;
+                @F4.started -= m_Wrapper.m_DebugActionsCallbackInterface.OnF4;
+                @F4.performed -= m_Wrapper.m_DebugActionsCallbackInterface.OnF4;
+                @F4.canceled -= m_Wrapper.m_DebugActionsCallbackInterface.OnF4;
+            }
+            m_Wrapper.m_DebugActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @F1.started += instance.OnF1;
+                @F1.performed += instance.OnF1;
+                @F1.canceled += instance.OnF1;
+                @F2.started += instance.OnF2;
+                @F2.performed += instance.OnF2;
+                @F2.canceled += instance.OnF2;
+                @F3.started += instance.OnF3;
+                @F3.performed += instance.OnF3;
+                @F3.canceled += instance.OnF3;
+                @F4.started += instance.OnF4;
+                @F4.performed += instance.OnF4;
+                @F4.canceled += instance.OnF4;
+            }
+        }
+    }
+    public DebugActions @Debug => new DebugActions(this);
     private int m_KeyboardMouseSchemeIndex = -1;
     public InputControlScheme KeyboardMouseScheme
     {
@@ -1333,5 +1484,12 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
         void OnRightClick(InputAction.CallbackContext context);
         void OnTrackedDevicePosition(InputAction.CallbackContext context);
         void OnTrackedDeviceOrientation(InputAction.CallbackContext context);
+    }
+    public interface IDebugActions
+    {
+        void OnF1(InputAction.CallbackContext context);
+        void OnF2(InputAction.CallbackContext context);
+        void OnF3(InputAction.CallbackContext context);
+        void OnF4(InputAction.CallbackContext context);
     }
 }

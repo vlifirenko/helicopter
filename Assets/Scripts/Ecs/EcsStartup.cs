@@ -1,5 +1,6 @@
 using Apache.Ecs.Component.Unit;
 using Apache.Ecs.System;
+using Apache.Ecs.System.Debug;
 using Apache.Ecs.System.Game;
 using Apache.Ecs.System.Input;
 using Apache.Ecs.System.Input.Gamepad;
@@ -47,6 +48,8 @@ namespace Apache.Ecs
 
                 // game
                 .Add(new GameSystem())
+                // audio
+                .Add(new InitAudioService())
                 // input
                 .Add(new InputMovementSystem())
                 .Add(new MouseTargetSystem())
@@ -68,6 +71,9 @@ namespace Apache.Ecs
 
                 //
 #if UNITY_EDITOR
+                // debug
+                .Add(new DebugAudioSystem())
+                //
                 .Add(new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem())
 #endif
                 .Inject(_gameData)
