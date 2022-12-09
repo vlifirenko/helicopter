@@ -9,5 +9,6 @@ namespace Apache.Model.Config
         public EventReference targetFound;
         public EventReference cannonShoot;
         public EventReference ambience;
+        public EventReference music;
     }
 }

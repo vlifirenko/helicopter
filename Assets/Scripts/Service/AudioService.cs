@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Apache.Utils;
+using Apache.Model.Audio;
 using FMOD.Studio;
 using FMODUnity;
 using UnityEngine;
@@ -11,6 +11,18 @@ namespace Apache.Service
         private readonly List<EventInstance> _eventInstances = new List<EventInstance>();
         private readonly List<StudioEventEmitter> _eventEmitters = new List<StudioEventEmitter>();
         private EventInstance _ambienceEventInstance;
+        private EventInstance _musicEventInstance;
+        private readonly Dictionary<string, Bus> _buses = new Dictionary<string, Bus>();
+
+        public void InitializeBuses()
+        {
+            _buses.Add(AudioBus.Master, RuntimeManager.GetBus(AudioBus.Master));
+            _buses.Add(AudioBus.Music, RuntimeManager.GetBus(AudioBus.Music));
+            _buses.Add(AudioBus.Ambience, RuntimeManager.GetBus(AudioBus.Ambience));
+            _buses.Add(AudioBus.SFX, RuntimeManager.GetBus(AudioBus.SFX));
+        }
+
+        public void SetBusVolume(string bus, float value) => _buses[bus].setVolume(value);
 
         public void PlayOneShot(EventReference eventReference, Vector3 worldPosition)
             => RuntimeManager.PlayOneShot(eventReference, worldPosition);
@@ -38,12 +50,18 @@ namespace Apache.Service
         {
             _ambienceEventInstance = CreateInstance(eventReference);
             _ambienceEventInstance.start();
-            _ambienceEventInstance.getParameterByName(AudioParameter.WindIntensity, out var value);
-            Debug.Log(value);
         }
 
-        public void SetAmbienceParameter(string parameter, float value) 
+        public void SetAmbienceParameter(string parameter, float value)
             => _ambienceEventInstance.setParameterByName(parameter, value);
+
+        public void InitializeMusic(EventReference eventReference)
+        {
+            _musicEventInstance = CreateInstance(eventReference);
+            _musicEventInstance.start();
+        }
+
+        public void SetMusicArea(float area) => _musicEventInstance.setParameterByName(AudioParameter.Area, area);
 
         public void Destroy()
         {

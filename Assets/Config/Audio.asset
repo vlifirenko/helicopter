@@ -33,3 +33,10 @@ MonoBehaviour:
       Data3: 1881994894
       Data4: 912248973
     Path: event:/Ambience/Wind
+  music:
+    Guid:
+      Data1: 1169011368
+      Data2: 1335225056
+      Data3: -1658858330
+      Data4: -513579653
+    Path: event:/Music/Level1Music

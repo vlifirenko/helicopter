@@ -1,10 +1,11 @@
 ﻿using Apache.Model;
+using Apache.Model.Audio;
 using Apache.Service;
 using Apache.Utils;
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
 
-namespace Apache.Ecs.System.Debug
+namespace Apache.Ecs.System.Audio
 {
     public class DebugAudioSystem : IEcsInitSystem, IEcsDestroySystem
     {
@@ -20,6 +21,7 @@ namespace Apache.Ecs.System.Debug
             input.Debug.F1.performed += context => OnF1();
             input.Debug.F2.performed += context => OnF2();
             input.Debug.F3.performed += context => OnF3();
+            input.Debug.F4.performed += context => OnF4();
         }
 
         private void OnF1()
@@ -34,7 +36,12 @@ namespace Apache.Ecs.System.Debug
 
         private void OnF3()
         {
-            _audioService.Value.SetAmbienceParameter(AudioParameter.WindIntensity, 0f);
+            _audioService.Value.SetMusicArea(0);
+        }
+        
+        private void OnF4()
+        {
+            _audioService.Value.SetMusicArea(1);
         }
 
         public void Destroy(IEcsSystems systems) => _gameData.Value.GameInput.Disable();

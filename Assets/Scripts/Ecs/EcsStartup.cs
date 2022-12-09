@@ -1,7 +1,6 @@
 using Apache.Ecs.Component.Unit;
 using Apache.Ecs.System;
-using Apache.Ecs.System.Debug;
-using Apache.Ecs.System.Game;
+using Apache.Ecs.System.Audio;
 using Apache.Ecs.System.Input;
 using Apache.Ecs.System.Input.Gamepad;
 using Apache.Ecs.System.Input.Mouse;
@@ -47,7 +46,7 @@ namespace Apache.Ecs
             _systems
 
                 // game
-                .Add(new GameSystem())
+                .Add(new InputSystem())
                 // audio
                 .Add(new InitAudioService())
                 // input

@@ -2,9 +2,9 @@
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
 
-namespace Apache.Ecs.System.Game
+namespace Apache.Ecs.System.Input
 {
-    public class GameSystem : IEcsInitSystem, IEcsDestroySystem
+    public class InputSystem : IEcsInitSystem, IEcsDestroySystem
     {
         private readonly EcsCustomInject<GameData> _gameData;
 
